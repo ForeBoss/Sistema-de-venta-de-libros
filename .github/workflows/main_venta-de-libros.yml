@@ -17,11 +17,11 @@ jobs:
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
-          distribution: 'temurin'  # Puedes cambiar a 'zulu', 'adopt-openjdk', etc., según tus necesidades
+          java-version: '17'  # Cambia a la versión de Java que necesites
+          distribution: 'temurin'
 
       - name: Build with Maven
-        run: mvn clean install -X  # Ejecutar Maven con depuración detallada
+        run: mvn clean install -X
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -36,7 +36,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write  # Necesario para solicitar el JWT
+      id-token: write
 
     steps:
       - name: Download artifact from build job
