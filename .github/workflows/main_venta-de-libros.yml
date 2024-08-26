@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        run: mvn clean install -X
+        run: mvn clean install -X  # Ejecutar Maven con depuración detallada
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
