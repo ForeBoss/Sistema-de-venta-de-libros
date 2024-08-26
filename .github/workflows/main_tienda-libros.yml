@@ -59,4 +59,3 @@ jobs:
           slot-name: 'Production'
           package: '*.jar'
 
-          
