@@ -11,13 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'temurin'
+          distribution: 'temurin'  # Puedes cambiar a 'zulu', 'adopt-openjdk', etc., según tus necesidades
 
       - name: Build with Maven
         run: mvn clean install -X  # Ejecutar Maven con depuración detallada
@@ -35,16 +36,13 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # This is required for requesting the JWT
+      id-token: write  # Necesario para solicitar el JWT
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
-
-      - name: List files in downloaded artifact directory
-        run: ls -al
 
       - name: Login to Azure
         uses: azure/login@v2
